@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
   body {
     font-family: 'Comfortaa', 'Segoe UI', sans-serif;
     background: linear-gradient(160deg, #f8f5ff 0%, #f0eaff 50%, #ede4fb 100%);
@@ -19,212 +18,79 @@
     position: relative;
     overflow-x: hidden;
   }
-
-  /* Мерцающие звёздочки на фоне */
-  .stars-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .star {
-    position: absolute;
-    color: #d4b8f0;
-    font-size: 14px;
-    animation: twinkle 4s infinite ease-in-out;
-    opacity: 0;
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0; transform: scale(0.8); }
-    50% { opacity: 0.7; transform: scale(1.2); }
-  }
-
+  .stars-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .star { position: absolute; color: #d4b8f0; font-size: 14px; animation: twinkle 4s infinite ease-in-out; opacity: 0; }
+  @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.8); } 50% { opacity: 0.7; transform: scale(1.2); } }
   .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-  
   header {
-    text-align: center;
-    padding: 40px 25px;
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(10px);
-    border-radius: 32px;
-    margin-bottom: 30px;
+    text-align: center; padding: 40px 25px;
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(10px);
+    border-radius: 32px; margin-bottom: 30px;
     box-shadow: 0 10px 40px rgba(180,150,220,0.15);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.8);
+    position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.8);
   }
   header::before {
     content: '🦄 ✨ 🧜‍♀️ ✨ 🦄';
-    position: absolute;
-    top: 12px; left: 0; right: 0;
-    font-size: 18px;
-    opacity: 0.35;
-    letter-spacing: 25px;
+    position: absolute; top: 12px; left: 0; right: 0;
+    font-size: 18px; opacity: 0.35; letter-spacing: 25px;
   }
-  
   h1 {
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 700;
-    font-size: 2.4em;
-    color: #9b6dd6;
-    margin: 25px 0 15px;
-    text-shadow: 
-      0 0 20px rgba(200,160,240,0.5),
-      0 2px 0 #fff,
-      0 4px 15px rgba(155,109,214,0.2);
-    letter-spacing: 0.5px;
-    animation: glow 3s ease-in-out infinite;
+    font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 2.4em;
+    color: #9b6dd6; margin: 25px 0 15px;
+    text-shadow: 0 0 20px rgba(200,160,240,0.5), 0 2px 0 #fff, 0 4px 15px rgba(155,109,214,0.2);
+    letter-spacing: 0.5px; animation: glow 3s ease-in-out infinite;
   }
   @keyframes glow {
     0%, 100% { text-shadow: 0 0 20px rgba(200,160,240,0.5), 0 2px 0 #fff, 0 4px 15px rgba(155,109,214,0.2); }
     50% { text-shadow: 0 0 30px rgba(200,160,240,0.8), 0 2px 0 #fff, 0 4px 20px rgba(155,109,214,0.4); }
   }
-  
   .date-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #e8d5ff, #d4b8f0);
-    color: #fff;
-    padding: 10px 28px;
-    border-radius: 30px;
-    font-weight: 600;
-    margin: 10px 0 25px;
-    font-size: 1.05em;
-    box-shadow: 0 6px 20px rgba(180,140,220,0.3);
-    letter-spacing: 0.5px;
+    display: inline-block; background: linear-gradient(135deg, #e8d5ff, #d4b8f0);
+    color: #fff; padding: 10px 28px; border-radius: 30px;
+    font-weight: 600; margin: 10px 0 25px; font-size: 1.05em;
+    box-shadow: 0 6px 20px rgba(180,140,220,0.3); letter-spacing: 0.5px;
   }
-  
-  .intro-text {
-    max-width: 700px;
-    margin: 0 auto;
-    font-size: 1.05em;
-    line-height: 1.7;
-    color: #5d4a75;
-  }
+  .intro-text { max-width: 700px; margin: 0 auto; font-size: 1.05em; line-height: 1.7; color: #5d4a75; }
   .intro-text p { margin-bottom: 12px; }
   .intro-text p:last-child { margin-bottom: 0; }
-  .intro-text .highlight {
-    color: #9b6dd6;
-    font-weight: 600;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 22px;
-  }
-  
+  .intro-text .highlight { color: #9b6dd6; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; }
   .card {
-    background: #fff;
-    border-radius: 26px;
-    overflow: hidden;
+    background: #fff; border-radius: 26px; overflow: hidden;
     box-shadow: 0 8px 25px rgba(180,150,220,0.12);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     border: 1px solid rgba(220,200,245,0.5);
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; transform: translateY(20px);
     animation: fadeInUp 0.6s ease forwards;
   }
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.1s; }
-  .card:nth-child(3) { animation-delay: 0.15s; }
-  .card:nth-child(4) { animation-delay: 0.2s; }
-  .card:nth-child(5) { animation-delay: 0.25s; }
-  .card:nth-child(6) { animation-delay: 0.3s; }
-  .card:nth-child(7) { animation-delay: 0.35s; }
-  .card:nth-child(8) { animation-delay: 0.4s; }
-  .card:nth-child(9) { animation-delay: 0.45s; }
-  .card:nth-child(10) { animation-delay: 0.5s; }
-  
-  .card:hover { 
-    transform: translateY(-6px); 
-    box-shadow: 0 16px 40px rgba(180,150,220,0.25); 
-  }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(180,150,220,0.25); }
   .card.taken { opacity: 0.7; border-color: #d0d0d0; background: #fafafa; }
   .card.taken .card-img { filter: grayscale(60%) brightness(0.95); }
   .card.taken:hover { transform: translateY(-2px); }
-  
-  .card-img-wrap {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    background: #f5f0ff;
-    position: relative;
-  }
-  .card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
+  .card-img-wrap { width: 100%; height: 200px; overflow: hidden; background: #f5f0ff; position: relative; }
+  .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .card:hover .card-img { transform: scale(1.05); }
-  
   .card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
-  .card-title { 
-    font-size: 1em; 
-    font-weight: 600; 
-    margin-bottom: 10px; 
-    color: #4a3d5c; 
-    min-height: 48px; 
-    line-height: 1.35;
-  }
-  .card-price { 
-    font-size: 1.3em; 
-    font-weight: 700; 
-    color: #9b6dd6; 
-    margin-bottom: 14px; 
-  }
+  .card-title { font-size: 1em; font-weight: 600; margin-bottom: 10px; color: #4a3d5c; min-height: 48px; line-height: 1.35; }
+  .card-price { font-size: 1.3em; font-weight: 700; color: #9b6dd6; margin-bottom: 14px; }
   .card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
-  
   .btn {
-    padding: 11px 16px;
-    border-radius: 14px;
-    border: none;
-    font-size: 0.9em;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    transition: all 0.25s ease;
-    font-family: 'Comfortaa', sans-serif;
-    display: block;
+    padding: 11px 16px; border-radius: 14px; border: none;
+    font-size: 0.9em; font-weight: 600; cursor: pointer;
+    text-decoration: none; text-align: center;
+    transition: all 0.25s ease; font-family: 'Comfortaa', sans-serif; display: block;
   }
-  .btn-ozon {
-    background: linear-gradient(135deg, #9b6dd6, #b088e0);
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(155,109,214,0.3);
-  }
-  .btn-ozon:hover { 
-    background: linear-gradient(135deg, #8a5bc6, #a078d0);
-    box-shadow: 0 6px 18px rgba(155,109,214,0.5);
-    transform: translateY(-2px);
-  }
-  .btn-status {
-    background: #f0eaff;
-    color: #7a5caf;
-    border: 1.5px solid #e0d0fa;
-  }
+  .btn-ozon { background: linear-gradient(135deg, #9b6dd6, #b088e0); color: #fff; box-shadow: 0 4px 12px rgba(155,109,214,0.3); }
+  .btn-ozon:hover { background: linear-gradient(135deg, #8a5bc6, #a078d0); box-shadow: 0 6px 18px rgba(155,109,214,0.5); transform: translateY(-2px); }
+  .btn-status { background: #f0eaff; color: #7a5caf; border: 1.5px solid #e0d0fa; }
   .btn-status:hover { background: #e4d5ff; transform: translateY(-2px); }
   .btn-status.taken { background: #ffe8ee; color: #c64a72; border-color: #ffc8d5; }
   .btn-status.taken:hover { background: #ffd8e2; }
   .btn-status:disabled { opacity: 0.5; cursor: wait; }
-  
   .loading { text-align: center; padding: 50px; font-size: 1.1em; color: #9b6dd6; }
-  
-  footer {
-    text-align: center;
-    padding: 40px 20px 30px;
-    color: #7a6b8a;
-    font-size: 0.95em;
-    line-height: 1.6;
-  }
-  
+  footer { text-align: center; padding: 40px 20px 30px; color: #7a6b8a; font-size: 0.95em; line-height: 1.6; }
   @media (max-width: 500px) {
     h1 { font-size: 1.7em; }
     header::before { font-size: 12px; letter-spacing: 12px; }
@@ -234,10 +100,7 @@
 </style>
 </head>
 <body>
-
-<!-- Мерцающие звёздочки -->
 <div class="stars-bg" id="starsBg"></div>
-
 <div class="container">
   <header>
     <h1>Подарки для Мирославы 🦄</h1>
@@ -248,42 +111,29 @@
       <p>О месте и времени празднования сообщим дополнительно 📩</p>
     </div>
   </header>
-
   <div id="content">
     <div class="loading">✨ Загружаем подарки... ✨</div>
   </div>
-
-  <footer>
-    Спасибо, что разделите с нами этот праздник! ✨🦄🧜‍♀️
-  </footer>
+  <footer>Спасибо, что разделите с нами этот праздник! ✨🦄🧜‍♀️</footer>
 </div>
-
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbwfyVYA0sc8TBORX1TaknRrkMxHbaJg9j9kfH5oDSBt0aCYPcD8mlXm6cWP9A09wHHtwA/exec";
 
-// Прямые ссылки на картинки (imgur)
 const IMAGES = {
-  1:  "https://i.imgur.com/RMYYnvf.jpg",  // Фломограф
-  2:  "https://i.imgur.com/BI2Qc2E.jpg",  // Лягушка
-  3:  "https://i.imgur.com/oAmU5cG.jpg",  // Морозная миссия
-  4:  "https://i.imgur.com/txQ9TYp.jpg",  // Интерактивный щенок
-  5:  "https://i.imgur.com/Mw2pxrA.jpg",  // Пицца
-  6:  "https://i.imgur.com/G6wvhO0.jpg",  // Раскраска
-  7:  "https://i.imgur.com/uP4Fu0J.jpg",  // Постельное "Единорог"
-  8:  "https://i.imgur.com/y6PYksq.jpg",  // Постельное "Балерина"
-  9:  "https://i.imgur.com/MZsowoi.jpg",  // Кукла
-  10: "https://i.imgur.com/SOKPJfA.jpg"   // Кукольный домик
+  1:  "https://i.imgur.com/RMYYnvf.jpg",
+  2:  "https://i.imgur.com/BI2Qc2E.jpg",
+  3:  "https://i.imgur.com/oAmU5cG.jpg",
+  4:  "https://i.imgur.com/txQ9TYp.jpg",
+  5:  "https://i.imgur.com/Mw2pxrA.jpg",
+  6:  "https://i.imgur.com/G6wvhO0.jpg",
+  7:  "https://i.imgur.com/uP4Fu0J.jpg",
+  8:  "https://i.imgur.com/y6PYksq.jpg",
+  9:  "https://i.imgur.com/MZsowoi.jpg",
+  10: "https://i.imgur.com/SOKPJfA.jpg"
 };
-};
-
-// Формируем прямую ссылку для Google Drive
-function driveImg(id, size = 600) {
-  return `https://drive.google.com/thumbnail?id=${id}&sz=w${size}`;
-}
 
 let gifts = [];
 
-// Нормализация ключей (убираем пробелы и регистр)
 function normalize(obj) {
   const out = {};
   for (const key in obj) {
@@ -292,7 +142,6 @@ function normalize(obj) {
   return out;
 }
 
-// Генерация мерцающих звёздочек
 function createStars() {
   const bg = document.getElementById("starsBg");
   const symbols = ["✦", "✧", "✨", "⭐", "·", "⋆"];
@@ -333,18 +182,13 @@ function render() {
     const link = g["ссылка"];
     const status = g["статус"];
     const isTaken = status === "Занято";
-
     const card = document.createElement("div");
     card.className = "card" + (isTaken ? " taken" : "");
     card.style.animationDelay = (index * 0.07) + "s";
-    
-    const imgId = IMAGE_IDS[id];
-    const imgUrl = imgId ? driveImg(imgId) : "";
-    
+    const imgUrl = IMAGES[id] || "";
     card.innerHTML = `
       <div class="card-img-wrap">
-        ${imgUrl ? `<img class="card-img" src="${imgUrl}" alt="${title}" 
-                      onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'font-size:3.5em;text-align:center;padding-top:50px\\'>🎁</div>'">` : ''}
+        ${imgUrl ? `<img class="card-img" src="${imgUrl}" alt="${title}" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'font-size:3.5em;text-align:center;padding-top:50px\\'>🎁</div>'">` : ''}
       </div>
       <div class="card-body">
         <div class="card-title">${title}</div>
@@ -369,10 +213,8 @@ async function toggleStatus(btn) {
   const id = btn.dataset.id;
   const current = btn.dataset.status;
   const newStatus = current === "Занято" ? "Свободно" : "Занято";
-
   btn.disabled = true;
   btn.textContent = "⏳ Обновляем...";
-
   try {
     const res = await fetch(API_URL, {
       method: "POST",
@@ -380,13 +222,8 @@ async function toggleStatus(btn) {
       body: JSON.stringify({ id: id, status: newStatus })
     });
     const data = await res.json();
-    if (data.ok) {
-      await loadGifts();
-    } else {
-      alert("Ошибка: " + (data.error || "неизвестная"));
-      btn.disabled = false;
-      loadGifts();
-    }
+    if (data.ok) { await loadGifts(); }
+    else { alert("Ошибка: " + (data.error || "неизвестная")); btn.disabled = false; loadGifts(); }
   } catch (err) {
     alert("Не удалось обновить. Проверьте интернет.");
     btn.disabled = false;
