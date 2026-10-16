@@ -4,110 +4,249 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Подарки для Мирославы 🦄</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  
   body {
-    font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
-    background: linear-gradient(135deg, #ffe0f0 0%, #e0d4ff 50%, #d4f0ff 100%);
+    font-family: 'Comfortaa', 'Segoe UI', sans-serif;
+    background: linear-gradient(160deg, #f8f5ff 0%, #f0eaff 50%, #ede4fb 100%);
     min-height: 100vh;
     padding: 20px;
-    color: #5a3d6b;
+    color: #4a3d5c;
+    position: relative;
+    overflow-x: hidden;
   }
-  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* Мерцающие звёздочки на фоне */
+  .stars-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    color: #d4b8f0;
+    font-size: 14px;
+    animation: twinkle 4s infinite ease-in-out;
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  
   header {
     text-align: center;
-    padding: 30px 20px;
-    background: rgba(255,255,255,0.6);
-    border-radius: 30px;
+    padding: 40px 25px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 32px;
     margin-bottom: 30px;
-    box-shadow: 0 8px 30px rgba(180,140,220,0.2);
+    box-shadow: 0 10px 40px rgba(180,150,220,0.15);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.8);
   }
   header::before {
     content: '🦄 ✨ 🧜‍♀️ ✨ 🦄';
     position: absolute;
-    top: 10px; left: 0; right: 0;
-    font-size: 20px;
-    opacity: 0.5;
-    letter-spacing: 20px;
+    top: 12px; left: 0; right: 0;
+    font-size: 18px;
+    opacity: 0.35;
+    letter-spacing: 25px;
   }
+  
   h1 {
-    font-size: 2.5em;
-    color: #b857c9;
-    margin: 20px 0 10px;
-    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(184,87,201,0.2);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    font-size: 2.4em;
+    color: #9b6dd6;
+    margin: 25px 0 15px;
+    text-shadow: 
+      0 0 20px rgba(200,160,240,0.5),
+      0 2px 0 #fff,
+      0 4px 15px rgba(155,109,214,0.2);
+    letter-spacing: 0.5px;
+    animation: glow 3s ease-in-out infinite;
   }
-  .subtitle { font-size: 1.1em; color: #7a5c8f; line-height: 1.5; max-width: 700px; margin: 0 auto; }
+  @keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(200,160,240,0.5), 0 2px 0 #fff, 0 4px 15px rgba(155,109,214,0.2); }
+    50% { text-shadow: 0 0 30px rgba(200,160,240,0.8), 0 2px 0 #fff, 0 4px 20px rgba(155,109,214,0.4); }
+  }
+  
   .date-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #ffb6e1, #c9a7ff);
+    background: linear-gradient(135deg, #e8d5ff, #d4b8f0);
     color: #fff;
-    padding: 8px 24px;
+    padding: 10px 28px;
     border-radius: 30px;
-    font-weight: bold;
-    margin: 15px 0;
-    font-size: 1.1em;
-    box-shadow: 0 4px 15px rgba(200,140,220,0.4);
+    font-weight: 600;
+    margin: 10px 0 25px;
+    font-size: 1.05em;
+    box-shadow: 0 6px 20px rgba(180,140,220,0.3);
+    letter-spacing: 0.5px;
   }
+  
+  .intro-text {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #5d4a75;
+  }
+  .intro-text p { margin-bottom: 12px; }
+  .intro-text p:last-child { margin-bottom: 0; }
+  .intro-text .highlight {
+    color: #9b6dd6;
+    font-weight: 600;
+  }
+  
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    gap: 22px;
   }
+  
   .card {
     background: #fff;
-    border-radius: 24px;
+    border-radius: 26px;
     overflow: hidden;
-    box-shadow: 0 6px 20px rgba(180,140,220,0.15);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 25px rgba(180,150,220,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    border: 3px solid #ffe0f5;
-    padding: 20px;
+    border: 1px solid rgba(220,200,245,0.5);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
   }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(180,140,220,0.3); }
-  .card.taken { opacity: 0.7; border-color: #c0c0c0; background: #f5f5f5; }
-  .card-emoji { font-size: 3em; text-align: center; margin-bottom: 10px; }
-  .card-body { flex: 1; display: flex; flex-direction: column; }
-  .card-title { font-size: 1.05em; font-weight: 600; margin-bottom: 10px; color: #5a3d6b; min-height: 50px; line-height: 1.3; }
-  .card-price { font-size: 1.4em; font-weight: bold; color: #b857c9; margin-bottom: 15px; }
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+  .card:nth-child(7) { animation-delay: 0.35s; }
+  .card:nth-child(8) { animation-delay: 0.4s; }
+  .card:nth-child(9) { animation-delay: 0.45s; }
+  .card:nth-child(10) { animation-delay: 0.5s; }
+  
+  .card:hover { 
+    transform: translateY(-6px); 
+    box-shadow: 0 16px 40px rgba(180,150,220,0.25); 
+  }
+  .card.taken { opacity: 0.7; border-color: #d0d0d0; background: #fafafa; }
+  .card.taken .card-img { filter: grayscale(60%) brightness(0.95); }
+  .card.taken:hover { transform: translateY(-2px); }
+  
+  .card-img-wrap {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f5f0ff;
+    position: relative;
+  }
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .card:hover .card-img { transform: scale(1.05); }
+  
+  .card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+  .card-title { 
+    font-size: 1em; 
+    font-weight: 600; 
+    margin-bottom: 10px; 
+    color: #4a3d5c; 
+    min-height: 48px; 
+    line-height: 1.35;
+  }
+  .card-price { 
+    font-size: 1.3em; 
+    font-weight: 700; 
+    color: #9b6dd6; 
+    margin-bottom: 14px; 
+  }
   .card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+  
   .btn {
     padding: 11px 16px;
     border-radius: 14px;
     border: none;
-    font-size: 0.95em;
+    font-size: 0.9em;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-    transition: all 0.2s;
-    font-family: inherit;
+    transition: all 0.25s ease;
+    font-family: 'Comfortaa', sans-serif;
     display: block;
   }
-  .btn-ozon { background: linear-gradient(135deg, #005bff, #0070ff); color: #fff; }
-  .btn-ozon:hover { background: linear-gradient(135deg, #0048cc, #005bff); }
-  .btn-status { background: #e8f5e9; color: #2e7d32; }
-  .btn-status:hover { background: #c8e6c9; }
-  .btn-status.taken { background: #ffebee; color: #c62828; }
-  .btn-status.taken:hover { background: #ffcdd2; }
+  .btn-ozon {
+    background: linear-gradient(135deg, #9b6dd6, #b088e0);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(155,109,214,0.3);
+  }
+  .btn-ozon:hover { 
+    background: linear-gradient(135deg, #8a5bc6, #a078d0);
+    box-shadow: 0 6px 18px rgba(155,109,214,0.5);
+    transform: translateY(-2px);
+  }
+  .btn-status {
+    background: #f0eaff;
+    color: #7a5caf;
+    border: 1.5px solid #e0d0fa;
+  }
+  .btn-status:hover { background: #e4d5ff; transform: translateY(-2px); }
+  .btn-status.taken { background: #ffe8ee; color: #c64a72; border-color: #ffc8d5; }
+  .btn-status.taken:hover { background: #ffd8e2; }
   .btn-status:disabled { opacity: 0.5; cursor: wait; }
-  .loading { text-align: center; padding: 40px; font-size: 1.2em; color: #b857c9; }
-  footer { text-align: center; padding: 30px 20px; color: #7a5c8f; font-size: 0.95em; }
+  
+  .loading { text-align: center; padding: 50px; font-size: 1.1em; color: #9b6dd6; }
+  
+  footer {
+    text-align: center;
+    padding: 40px 20px 30px;
+    color: #7a6b8a;
+    font-size: 0.95em;
+    line-height: 1.6;
+  }
+  
   @media (max-width: 500px) {
-    h1 { font-size: 1.8em; }
-    header::before { font-size: 14px; letter-spacing: 12px; }
+    h1 { font-size: 1.7em; }
+    header::before { font-size: 12px; letter-spacing: 12px; }
     .grid { grid-template-columns: 1fr; }
+    .card-img-wrap { height: 180px; }
   }
 </style>
 </head>
 <body>
+
+<!-- Мерцающие звёздочки -->
+<div class="stars-bg" id="starsBg"></div>
+
 <div class="container">
   <header>
     <h1>Подарки для Мирославы 🦄</h1>
     <div class="date-badge">🎂 22 октября • 4 года 🎂</div>
-    <p class="subtitle">Выберите подарок и отметьте его занятым, чтобы другие не дарили то же самое 💕</p>
+    <div class="intro-text">
+      <p>У Мирославы день рождения — ей исполняется <span class="highlight">4 года</span>! 🎉</p>
+      <p>Мы подготовили список подарков, которые Мирослава была бы рада получить. Выберите один или несколько — а если хотите придумать что-то своё, сюрпризы мы тоже очень любим! 💕</p>
+      <p>О месте и времени празднования сообщим дополнительно 📩</p>
+    </div>
   </header>
 
   <div id="content">
@@ -115,35 +254,65 @@
   </div>
 
   <footer>
-    Спасибо, что разделите с нами этот праздник! 🎉🧜‍♀️✨
+    Спасибо, что разделите с нами этот праздник! ✨🦄🧜‍♀️
   </footer>
 </div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbwfyVYA0sc8TBORX1TaknRrkMxHbaJg9j9kfH5oDSBt0aCYPcD8mlXm6cWP9A09wHHtwA/exec";
 
-// Эмодзи для каждого подарка (по ID). Можно поменять на любые.
-const EMOJI = {
-  1:  "🎨", // Фломограф
-  2:  "🐸", // Лягушка ест бобы
-  3:  "🐧", // Морозная миссия
-  4:  "🐶", // Интерактивная собака
-  5:  "🍕", // Пицца
-  6:  "🖍️", // Раскраска
-  7:  "🦄", // Постельное "Единорог"
-  8:  "🩰", // Постельное "Балерина"
-  9:  "🎎", // Кукла
-  10: "🏠"  // Кукольный домик
+// ID картинок из Google Drive (по ID подарка)
+const IMAGE_IDS = {
+  1:  "1p-I5nnBuXMdYSDcRswcqS_Htk5yjJM96",  // Фломограф
+  2:  "1wmRVJnarX-KoIqysrGI4Q1EbqfWzcDIp",  // Лягушка
+  3:  "1Dqg6RMi0PC8-BIkcDzP5x3YGCgiFVN12",  // Морозная миссия
+  4:  "1sGLD62k_nthSM-e3HI428cNn6DNy7-wp",  // Интерактивный щенок
+  5:  "1ghZ6QIX952Npb0lEL9LH3RW9AjkNYVfY",  // Пицца
+  6:  "1cE_vjMOrDFM_t2VHG08v_ViS4g97ogMY",  // Раскраска
+  7:  "1DAL53ZRg3gy5fmTdab3umd9-BJoLeOEf",  // Постельное "Единорог"
+  8:  "1Ds5hqnSVZHtADaaRky7XNnZywijeMyal",  // Постельное "Балерина"
+  9:  "1hA4-OJp2TqZHI-QIITvRtDvGCJDn42Fy",  // Кукла
+  10: "1Y8mQJQJ3ACUEBYBVJ_Iah5Qydv1HHvPN"   // Кукольный домик
 };
 
+// Формируем прямую ссылку для Google Drive
+function driveImg(id, size = 600) {
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w${size}`;
+}
+
 let gifts = [];
+
+// Нормализация ключей (убираем пробелы и регистр)
+function normalize(obj) {
+  const out = {};
+  for (const key in obj) {
+    out[key.trim().toLowerCase()] = typeof obj[key] === "string" ? obj[key].trim() : obj[key];
+  }
+  return out;
+}
+
+// Генерация мерцающих звёздочек
+function createStars() {
+  const bg = document.getElementById("starsBg");
+  const symbols = ["✦", "✧", "✨", "⭐", "·", "⋆"];
+  for (let i = 0; i < 35; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = (Math.random() * 4) + "s";
+    star.style.fontSize = (10 + Math.random() * 14) + "px";
+    bg.appendChild(star);
+  }
+}
 
 async function loadGifts() {
   try {
     const res = await fetch(API_URL);
     const data = await res.json();
     if (!data.ok) throw new Error("Ошибка загрузки");
-    gifts = data.items;
+    gifts = data.items.map(normalize);
     render();
   } catch (err) {
     document.getElementById("content").innerHTML =
@@ -156,24 +325,26 @@ function render() {
   content.innerHTML = '<div class="grid" id="grid"></div>';
   const grid = document.getElementById("grid");
 
-  gifts.forEach(g => {
-    // Читаем поля, устойчиво к регистру и пробелам
-    const get = (obj, key) => {
-      const found = Object.keys(obj).find(k => k.trim().toLowerCase() === key.toLowerCase());
-      return found ? String(obj[found]).trim() : "";
-    };
-
-    const id       = get(g, "ID");
-    const title    = get(g, "Подарок");
-    const price    = get(g, "Цена");
-    const link     = get(g, "Ссылка");
-    const status   = get(g, "Статус");
-    const isTaken  = status === "Занято";
+  gifts.forEach((g, index) => {
+    const id = String(g["id"]);
+    const title = g["подарок"];
+    const price = g["цена"];
+    const link = g["ссылка"];
+    const status = g["статус"];
+    const isTaken = status === "Занято";
 
     const card = document.createElement("div");
     card.className = "card" + (isTaken ? " taken" : "");
+    card.style.animationDelay = (index * 0.07) + "s";
+    
+    const imgId = IMAGE_IDS[id];
+    const imgUrl = imgId ? driveImg(imgId) : "";
+    
     card.innerHTML = `
-      <div class="card-emoji">${EMOJI[id] || "🎁"}</div>
+      <div class="card-img-wrap">
+        ${imgUrl ? `<img class="card-img" src="${imgUrl}" alt="${title}" 
+                      onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'font-size:3.5em;text-align:center;padding-top:50px\\'>🎁</div>'">` : ''}
+      </div>
       <div class="card-body">
         <div class="card-title">${title}</div>
         <div class="card-price">${price} ₽</div>
@@ -209,7 +380,6 @@ async function toggleStatus(btn) {
     });
     const data = await res.json();
     if (data.ok) {
-      // Перезагружаем данные, чтобы отобразить актуальные статусы у всех
       await loadGifts();
     } else {
       alert("Ошибка: " + (data.error || "неизвестная"));
@@ -223,6 +393,7 @@ async function toggleStatus(btn) {
   }
 }
 
+createStars();
 loadGifts();
 </script>
 </body>
