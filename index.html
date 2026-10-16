@@ -38,7 +38,7 @@
     font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 2.4em;
     color: #9b6dd6; margin: 25px 0 15px;
     text-shadow: 0 0 20px rgba(200,160,240,0.5), 0 2px 0 #fff, 0 4px 15px rgba(155,109,214,0.2);
-    letter-spacing: 0.5px; animation: glow 3s ease-in-out infinite;
+    animation: glow 3s ease-in-out infinite;
   }
   @keyframes glow {
     0%, 100% { text-shadow: 0 0 20px rgba(200,160,240,0.5), 0 2px 0 #fff, 0 4px 15px rgba(155,109,214,0.2); }
@@ -48,7 +48,7 @@
     display: inline-block; background: linear-gradient(135deg, #e8d5ff, #d4b8f0);
     color: #fff; padding: 10px 28px; border-radius: 30px;
     font-weight: 600; margin: 10px 0 25px; font-size: 1.05em;
-    box-shadow: 0 6px 20px rgba(180,140,220,0.3); letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(180,140,220,0.3);
   }
   .intro-text { max-width: 700px; margin: 0 auto; font-size: 1.05em; line-height: 1.7; color: #5d4a75; }
   .intro-text p { margin-bottom: 12px; }
@@ -69,9 +69,10 @@
   .card.taken { opacity: 0.7; border-color: #d0d0d0; background: #fafafa; }
   .card.taken .card-img { filter: grayscale(60%) brightness(0.95); }
   .card.taken:hover { transform: translateY(-2px); }
-  .card-img-wrap { width: 100%; height: 200px; overflow: hidden; background: #f5f0ff; position: relative; }
+  .card-img-wrap { width: 100%; height: 200px; overflow: hidden; background: #f5f0ff; position: relative; display: flex; align-items: center; justify-content: center; }
   .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .card:hover .card-img { transform: scale(1.05); }
+  .card-emoji { font-size: 3.5em; text-align: center; }
   .card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
   .card-title { font-size: 1em; font-weight: 600; margin-bottom: 10px; color: #4a3d5c; min-height: 48px; line-height: 1.35; }
   .card-price { font-size: 1.3em; font-weight: 700; color: #9b6dd6; margin-bottom: 14px; }
@@ -119,17 +120,23 @@
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbwfyVYA0sc8TBORX1TaknRrkMxHbaJg9j9kfH5oDSBt0aCYPcD8mlXm6cWP9A09wHHtwA/exec";
 
-const IMAGES = {
-  1:  "https://i.imgur.com/RMYYnvf.jpg",
-  2:  "https://i.imgur.com/BI2Qc2E.jpg",
-  3:  "https://i.imgur.com/oAmU5cG.jpg",
-  4:  "https://i.imgur.com/txQ9TYp.jpg",
-  5:  "https://i.imgur.com/Mw2pxrA.jpg",
-  6:  "https://i.imgur.com/G6wvhO0.jpg",
-  7:  "https://i.imgur.com/uP4Fu0J.jpg",
-  8:  "https://i.imgur.com/y6PYksq.jpg",
-  9:  "https://i.imgur.com/MZsowoi.jpg",
-  10: "https://i.imgur.com/SOKPJfA.jpg"
+// ID картинок Google Drive (по ID подарка)
+const DRIVE_IDS = {
+  1:  "1p-I5nnBuXMdYSDcRswcqS_Htk5yjJM96",
+  2:  "1wmRVJnarX-KoIqysrGI4Q1EbqfWzcDIp",
+  3:  "1Dqg6RMi0PC8-BIkcDzP5x3YGCgiFVN12",
+  4:  "1sGLD62k_nthSM-e3HI428cNn6DNy7-wp",
+  5:  "1ghZ6QIX952Npb0lEL9LH3RW9AjkNYVfY",
+  6:  "1cE_vjMOrDFM_t2VHG08v_ViS4g97ogMY",
+  7:  "1DAL53ZRg3gy5fmTdab3umd9-BJoLeOEf",
+  8:  "1Ds5hqnSVZHtADaaRky7XNnZywijeMyal",
+  9:  "1hA4-OJp2TqZHI-QIITvRtDvGCJDn42Fy",
+  10: "1Y8mQJQJ3ACUEBYBVJ_Iah5Qydv1HHvPN"
+};
+
+const EMOJI = {
+  "1": "🎨", "2": "🐸", "3": "🐧", "4": "🐶", "5": "🍕",
+  "6": "🖍️", "7": "🦄", "8": "🩰", "9": "🎎", "10": "🏠"
 };
 
 let gifts = [];
@@ -137,9 +144,14 @@ let gifts = [];
 function normalize(obj) {
   const out = {};
   for (const key in obj) {
-    out[key.trim().toLowerCase()] = typeof obj[key] === "string" ? obj[key].trim() : obj[key];
+    out[String(key).trim().toLowerCase()] = typeof obj[key] === "string" ? obj[key].trim() : obj[key];
   }
   return out;
+}
+
+// Ссылка на картинку Google Drive
+function driveImg(id, size = 600) {
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w${size}`;
 }
 
 function createStars() {
@@ -182,14 +194,19 @@ function render() {
     const link = g["ссылка"];
     const status = g["статус"];
     const isTaken = status === "Занято";
+    const imgUrl = DRIVE_IDS[id] ? driveImg(DRIVE_IDS[id]) : "";
+
     const card = document.createElement("div");
     card.className = "card" + (isTaken ? " taken" : "");
     card.style.animationDelay = (index * 0.07) + "s";
-    const imgUrl = IMAGES[id] || "";
+
+    const imgHtml = imgUrl
+      ? `<img class="card-img" src="${imgUrl}" alt="${title}" 
+              onerror="this.parentElement.innerHTML='<div class=\\'card-emoji\\'>${EMOJI[id] || '🎁'}</div>'">`
+      : `<div class="card-emoji">${EMOJI[id] || '🎁'}</div>`;
+
     card.innerHTML = `
-      <div class="card-img-wrap">
-        ${imgUrl ? `<img class="card-img" src="${imgUrl}" alt="${title}" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'font-size:3.5em;text-align:center;padding-top:50px\\'>🎁</div>'">` : ''}
-      </div>
+      <div class="card-img-wrap">${imgHtml}</div>
       <div class="card-body">
         <div class="card-title">${title}</div>
         <div class="card-price">${price} ₽</div>
